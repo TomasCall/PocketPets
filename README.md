@@ -1,2 +1,2 @@
 # PocketPets
-- ÁKOS
+- ÁKOS2

@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-CombatFiles",
+      "appliesTo": "PocketPets/Assets/CombatFiles/",
+      "type": "launch"
+    }
+  ]
+}

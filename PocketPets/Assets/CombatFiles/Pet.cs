@@ -46,4 +46,9 @@ public class Pet : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(double damage)
+    {
+        health -= damage;
+    }
 }

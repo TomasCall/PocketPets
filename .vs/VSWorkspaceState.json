@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PocketPets"
+    "\\PocketPets",
+    "\\PocketPets\\Assets",
+    "\\PocketPets\\Assets\\CombatFiles",
+    "\\PocketPets\\Assets\\MenuFiles"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\PocketPets\\Assets\\CombatFiles\\EnemyScript.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class BattleSystem : MonoBehaviour
     public Text enemyText;
     public Text itemText;
     int index;
+    public GameObject EndGameDialog;
+    public GameObject CombatPanel;
+    public Text ResultText;
 
     void Start()
     {
@@ -27,6 +31,8 @@ public class BattleSystem : MonoBehaviour
 
         index = 0;
         itemText.text = player.items[index];
+
+        EndGameDialog.SetActive(false);
     }
     
     IEnumerator Turn()
@@ -38,6 +44,11 @@ public class BattleSystem : MonoBehaviour
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
             enemyText.text = enemy.health.ToString();
             yield return new WaitForSeconds(2f);
+            if(enemy.health <= 0)
+            {
+                state = BattleState.WON;
+                ShowEndGameDialog();
+            }
         }
         enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
         StartCoroutine(EnemyTurn());
@@ -75,15 +86,23 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(2f);
             playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
         }
-        state = BattleState.PLAYERS_TURN;
+        if(player.health <= 0)
+        {
+            state = BattleState.LOST;
+            ShowEndGameDialog();
+        }
+        else
+        {
+            state = BattleState.PLAYERS_TURN;
+        }
     }
 
-    public void OnAttackButton()
+    public void ClickOnAttackButton()
     {
         StartCoroutine(Turn());
     }
     
-    public void NextItemButton()
+    public void ClickOnNextItemButton()
     {
         if(player.items.Count() != 0)
         {
@@ -100,7 +119,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    public void PreviousItemButton()
+    public void ClickOnPreviousItemButton()
     {
         if(player.items.Count() != 0)
         {
@@ -117,7 +136,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    public void UseItemButton()
+    public void ClickOnUseItemButton()
     {
         if(player.items.Count() != 0)
         {
@@ -165,6 +184,27 @@ public class BattleSystem : MonoBehaviour
         //Starts enemy turn
         yield return new WaitForSeconds(2f);
         StartCoroutine(Turn());
+    }
+
+    void ShowEndGameDialog()
+    {
+        playerGameObject.SetActive(false);
+        enemyGameObject.SetActive(false);
+        CombatPanel.SetActive(false);
+        EndGameDialog.SetActive(true);
+        if(state == BattleState.WON)
+        {
+            ResultText.text = "You won the battle";
+        }
+        else
+        {
+            ResultText.text = "You lost the battle";
+        }
+    }
+
+    public void ClickOnContinueButton()
+    {
+        SceneManager.LoadScene("Game");
     }
 }
 

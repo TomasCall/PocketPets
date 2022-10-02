@@ -108,7 +108,7 @@ public class BattleSystem : MonoBehaviour
     
     public void ClickOnNextItemButton()
     {
-        if(player.items.Count() != 0)
+        if(index+1 <= 0)
         {
             if(index+1 == player.items.Count())
             {
@@ -127,14 +127,14 @@ public class BattleSystem : MonoBehaviour
     {
         if(player.items.Count() != 0)
         {
-            if(index-1 == 0)
+            if(index-1 <= 0)
             {
                 index = 0;
                 itemText.text = player.items[index];
             }
             else
             {
-                index++;
+                index--;
                 itemText.text = player.items[index];
             }
         }
@@ -208,7 +208,7 @@ public class BattleSystem : MonoBehaviour
 
     public void ClickOnContinueButton()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Menu");
     }
 }
 

@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class BattleSystem : MonoBehaviour
 {
@@ -13,13 +14,13 @@ public class BattleSystem : MonoBehaviour
     Pet enemy;
     public GameObject playerGameObject;
     public GameObject enemyGameObject;
-    public Text playerText;
-    public Text enemyText;
-    public Text itemText;
+    public TextMeshProUGUI playerText;
+    public TextMeshProUGUI enemyText;
+    public TextMeshProUGUI itemText;
     int index;
     public GameObject EndGameDialog;
     public GameObject CombatPanel;
-    public Text ResultText;
+    public TextMeshProUGUI ResultText;
 
     void Start()
     {
@@ -99,12 +100,15 @@ public class BattleSystem : MonoBehaviour
 
     public void ClickOnAttackButton()
     {
-        StartCoroutine(Turn());
+        if(state == BattleState.PLAYERS_TURN)
+        {
+            StartCoroutine(Turn());
+        }
     }
     
     public void ClickOnNextItemButton()
     {
-        if(player.items.Count() != 0)
+        if(index+1 <= 0)
         {
             if(index+1 == player.items.Count())
             {
@@ -123,14 +127,14 @@ public class BattleSystem : MonoBehaviour
     {
         if(player.items.Count() != 0)
         {
-            if(index-1 == 0)
+            if(index-1 <= 0)
             {
                 index = 0;
                 itemText.text = player.items[index];
             }
             else
             {
-                index++;
+                index--;
                 itemText.text = player.items[index];
             }
         }
@@ -204,7 +208,7 @@ public class BattleSystem : MonoBehaviour
 
     public void ClickOnContinueButton()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Menu");
     }
 }
 

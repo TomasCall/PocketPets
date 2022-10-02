@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PocketPets"
+    "\\PocketPets",
+    "\\PocketPets\\Assets",
+    "\\PocketPets\\Assets\\CombatFiles",
+    "\\PocketPets\\Assets\\MenuFiles"
   ],
   "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false

@@ -108,9 +108,9 @@ public class BattleSystem : MonoBehaviour
     
     public void ClickOnNextItemButton()
     {
-        if(index+1 <= 0)
+        if(player.items.Count() != 0)
         {
-            if(index+1 == player.items.Count())
+            if(index+1 >= player.items.Count())
             {
                 index = 0;
                 itemText.text = player.items[index];
@@ -127,9 +127,9 @@ public class BattleSystem : MonoBehaviour
     {
         if(player.items.Count() != 0)
         {
-            if(index-1 <= 0)
+            if(index-1 < 0)
             {
-                index = 0;
+                index = player.items.Count-1;
                 itemText.text = player.items[index];
             }
             else

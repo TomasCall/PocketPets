@@ -1,10 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\PocketPets",
-    "\\PocketPets\\Assets",
-    "\\PocketPets\\Assets\\CombatFiles",
-    "\\PocketPets\\Assets\\MenuFiles"
+    ""
   ],
   "SelectedNode": "\\PocketPets\\Assets\\CombatFiles\\BattleSystem.cs",
   "PreviewInSolutionExplorer": false

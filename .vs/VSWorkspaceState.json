@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PocketPets",
+    "\\PocketPets\\Assets",
+    "\\PocketPets\\Assets\\CombatFiles",
+    "\\PocketPets\\Assets\\MenuFiles"
   ],
   "PreviewInSolutionExplorer": false
 }

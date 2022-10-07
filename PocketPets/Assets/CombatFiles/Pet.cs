@@ -13,16 +13,46 @@ public class Pet : MonoBehaviour
     public double criticalChance;
     public List<string> items;
 
+    private DifficultySetter difficultySetter;
+    public double enemyModifier = 1;
+
 
     public double GetAttack()
     {
+        DiffChecker();
         System.Random random = new System.Random();
         int playerChance = random.Next(0, 100);
-        if(criticalChance > playerChance)
+        if (gameObject.CompareTag("Enemy") && criticalChance > playerChance)
+        {
+            return (attack + modifier) * 1.5 * enemyModifier;
+        }
+        if (criticalChance > playerChance)
         {
             return (attack + modifier) * 1.5;
         }
-        return attack + modifier;
+        if (gameObject.CompareTag("Enemy"))
+        {
+            return (attack + modifier) * enemyModifier;
+        }
+        else { 
+            return attack + modifier;
+        }
+    }
+
+    public void DiffChecker()
+    {
+        if (DifficultySetter.isDiffEasy == true)
+        {
+            enemyModifier = 0.75;
+        }
+        if (DifficultySetter.isDiffNormal == true)
+        {
+            enemyModifier = 1;
+        }
+        if (DifficultySetter.isDiffHard == true)
+        {
+            enemyModifier = 1.25;
+        }
     }
 
     public void UseItem(string item)

@@ -1,2 +1,3 @@
 # PocketPets
-- ÁKOS
+Geri
+Peti

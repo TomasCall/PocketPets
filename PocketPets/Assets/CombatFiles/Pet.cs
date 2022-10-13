@@ -13,7 +13,7 @@ public class Pet : MonoBehaviour
     public double criticalChance;
     public List<string> items;
 
-    private DifficultySetter difficultySetter;
+    private MainMenu mainMenu;
     public double enemyModifier = 1;
 
 
@@ -41,15 +41,15 @@ public class Pet : MonoBehaviour
 
     public void DiffChecker()
     {
-        if (DifficultySetter.isDiffEasy == true)
+        if (MainMenu.isDiffEasy)
         {
             enemyModifier = 0.75;
         }
-        if (DifficultySetter.isDiffNormal == true)
+        if (MainMenu.isDiffNormal)
         {
             enemyModifier = 1;
         }
-        if (DifficultySetter.isDiffHard == true)
+        if (MainMenu.isDiffHard)
         {
             enemyModifier = 1.25;
         }

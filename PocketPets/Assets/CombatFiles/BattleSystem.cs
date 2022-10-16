@@ -14,8 +14,8 @@ public class BattleSystem : MonoBehaviour
     Pet enemy;
     public GameObject playerGameObject;
     public GameObject enemyGameObject;
-    public TextMeshProUGUI playerText;
-    public TextMeshProUGUI enemyText;
+    public GameObject playerHealth;
+    public GameObject enemyHealth;
     public TextMeshProUGUI itemText;
     int index;
     public GameObject EndGameDialog;
@@ -43,7 +43,7 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.ENEMYS_TURN;
             enemy.TakeDamage(player.GetAttack());
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-            enemyText.text = enemy.health.ToString();
+            enemyHealth.GetComponent<Slider>().value = enemy.health;
             yield return new WaitForSeconds(2f);
             if(enemy.health <= 0)
             {
@@ -66,7 +66,7 @@ public class BattleSystem : MonoBehaviour
             enemy.UseItem(item);
             enemy.items.Remove(item);
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
-            enemyText.text = enemy.health.ToString();
+            enemyHealth.GetComponent<Slider>().value = enemy.health;
             yield return new WaitForSeconds(2f);
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
         } // If the random number is less then 50 and enemy has attack modider it uses it
@@ -83,7 +83,7 @@ public class BattleSystem : MonoBehaviour
         {
             player.TakeDamage(enemy.GetAttack());
             playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-            playerText.text = player.health.ToString();
+            playerHealth.GetComponent<Slider>().value = player.health;
             yield return new WaitForSeconds(2f);
             playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
         }
@@ -165,7 +165,7 @@ public class BattleSystem : MonoBehaviour
             playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
             player.UseItem(item);
             player.items.Remove(item);
-            playerText.text = player.health.ToString();
+            playerHealth.GetComponent<Slider>().value = player.health;
         }
 
         //Resetting the player object color
@@ -196,6 +196,8 @@ public class BattleSystem : MonoBehaviour
         enemyGameObject.SetActive(false);
         CombatPanel.SetActive(false);
         EndGameDialog.SetActive(true);
+        playerHealth.SetActive(false);
+        enemyHealth.SetActive(false);
         if(state == BattleState.WON)
         {
             ResultText.text = "You won the battle";

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
     }
 
     void Update()
@@ -35,14 +38,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Exit"))
         {
-            player.transform.position = teleportPoint.transform.position;
-            player.transform.rotation = teleportPoint.transform.rotation;
-            Debug.Log("Teleporting to next area!");
+            StartCoroutine(Teleporting());
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
-            SceneManager.LoadScene("Combat", LoadSceneMode.Single);
-            Debug.Log("Entering Combat!");
+
+            StartCoroutine(WaitingBeforeSceneLoad());
         }
     }
+    IEnumerator Teleporting() {
+        yield return new WaitForSeconds(0.5f);
+        player.transform.position = teleportPoint.transform.position;
+        player.transform.rotation = teleportPoint.transform.rotation;
+        Debug.Log("Teleporting to next area!");
+    }
+
+    IEnumerator WaitingBeforeSceneLoad()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(3);
+        Debug.Log("Entering Combat!");
+    }
+
 }

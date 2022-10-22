@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PocketPets",
+    "\\PocketPets\\Assets",
+    "\\PocketPets\\Assets\\CombatFiles",
+    "\\PocketPets\\Assets\\MenuFiles"
   ],
-  "SelectedNode": "\\PocketPets\\Assets\\TextMesh Pro",
+  "SelectedNode": "\\PocketPets\\Assets\\CombatFiles\\Pet.cs",
   "PreviewInSolutionExplorer": false
 }

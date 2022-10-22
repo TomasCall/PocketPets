@@ -18,7 +18,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void VolumeSlider(float volume)
     {
-        volumeTextUI.text = volume.ToString("0.0" + "db");
+        volumeTextUI.text = volume.ToString("0.0");
     }
 
     public void SetVolumeButton()

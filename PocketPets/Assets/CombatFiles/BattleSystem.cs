@@ -21,9 +21,16 @@ public class BattleSystem : MonoBehaviour
     public GameObject EndGameDialog;
     public GameObject CombatPanel;
     public TextMeshProUGUI ResultText;
+    public GameObject playerManeBar;
+    public GameObject enemyManaBar;
+
+    private float playerAttack;
 
     void Start()
     {
+        playerManeBar.GetComponent<Slider>().value = 0f;
+        enemyManaBar.GetComponent<Slider>().value = 0f;
+
         state = BattleState.START;
         player = playerGameObject.GetComponent<Pet>();
         enemy = enemyGameObject.GetComponent<Pet>();
@@ -41,7 +48,7 @@ public class BattleSystem : MonoBehaviour
         if(state == BattleState.PLAYERS_TURN)
         {
             state = BattleState.ENEMYS_TURN;
-            enemy.TakeDamage(player.GetAttack());
+            enemy.TakeDamage(playerAttack);
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
             enemyHealth.GetComponent<Slider>().value = enemy.health;
             yield return new WaitForSeconds(2f);
@@ -62,6 +69,12 @@ public class BattleSystem : MonoBehaviour
         //If the enemies health less then 50 and the enemy has a healing item it uses it
         if(enemy.health <= 50 && enemy.items.Where(x=>x.Contains("h")).Count() >= 1)
         {
+            if (enemy.mana < 3f)
+            {
+                enemy.mana++;
+                enemyManaBar.GetComponent<Slider>().value = enemy.mana;
+            }
+
             string item = enemy.items.Where(x => x.Contains("h")).ToList()[0].ToString();
             enemy.UseItem(item);
             enemy.items.Remove(item);
@@ -72,6 +85,12 @@ public class BattleSystem : MonoBehaviour
         } // If the random number is less then 50 and enemy has attack modider it uses it
         else if (number<= 40 && enemy.items.Where(x=>x.Contains("a")).Count() >= 1)
         {
+            if (enemy.mana < 3f)
+            {
+                enemy.mana++;
+                enemyManaBar.GetComponent<Slider>().value = enemy.mana;
+            }
+
             string item = enemy.items.Where(x => x.Contains("a")).ToList()[0].ToString();
             enemy.UseItem(item);
             enemy.items.Remove(item);
@@ -81,11 +100,38 @@ public class BattleSystem : MonoBehaviour
         }//Enemy attacks
         else
         {
-            player.TakeDamage(enemy.GetAttack());
-            playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-            playerHealth.GetComponent<Slider>().value = player.health;
-            yield return new WaitForSeconds(2f);
-            playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            if(enemy.mana == 3f)
+            {
+                enemy.mana = 0f;
+                enemyManaBar.GetComponent<Slider>().value = enemy.mana;
+
+                player.TakeDamage(enemy.getUltimate());
+                playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                playerHealth.GetComponent<Slider>().value = player.health;
+                yield return new WaitForSeconds(2f);
+                playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            } else if(enemy.mana == 2f && number%2==0)
+            {
+                enemy.mana = 0f;
+                enemyManaBar.GetComponent<Slider>().value = enemy.mana;
+
+                player.TakeDamage(enemy.getAdvanced());
+                playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                playerHealth.GetComponent<Slider>().value = player.health;
+                yield return new WaitForSeconds(2f);
+                playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            } 
+            else
+            {
+                enemy.mana++;
+                enemyManaBar.GetComponent<Slider>().value = enemy.mana;
+
+                player.TakeDamage(enemy.GetAttack());
+                playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                playerHealth.GetComponent<Slider>().value = player.health;
+                yield return new WaitForSeconds(2f);
+                playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            }
         }
         if(player.health <= 0)
         {
@@ -102,6 +148,12 @@ public class BattleSystem : MonoBehaviour
     {
         if(state == BattleState.PLAYERS_TURN)
         {
+            playerAttack = player.GetAttack();
+            if(player.mana < 3f)
+            {
+                player.mana++;
+                playerManeBar.GetComponent<Slider>().value = player.mana;
+            }
             StartCoroutine(Turn());
         }
     }
@@ -144,6 +196,11 @@ public class BattleSystem : MonoBehaviour
     {
         if(player.items.Count() != 0)
         {
+            if (player.mana < 3f)
+            {
+                player.mana++;
+                playerManeBar.GetComponent<Slider>().value = player.mana;
+            }
             StartCoroutine(UseItem());
         }
     }
@@ -211,6 +268,28 @@ public class BattleSystem : MonoBehaviour
     public void ClickOnContinueButton()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void clickOnAdvancedButton()
+    {
+        if (state == BattleState.PLAYERS_TURN && player.mana >= 2f)
+        {
+            playerAttack = player.getAdvanced();
+            player.mana -= 2f;
+            playerManeBar.GetComponent<Slider>().value = player.mana;
+            StartCoroutine(Turn());
+        }
+    }
+
+    public void clickOnUltimateButton()
+    {
+        if (state == BattleState.PLAYERS_TURN && player.mana == 3f)
+        {
+            playerAttack = player.getUltimate();
+            player.mana = 0;
+            playerManeBar.GetComponent<Slider>().value = player.mana;
+            StartCoroutine(Turn());
+        }
     }
 }
 

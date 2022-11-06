@@ -12,7 +12,7 @@ public class Pet : MonoBehaviour
     public float modifier;
     public double criticalChance;
     public List<string> items;
-
+    public float mana;
     private DifficultySetter difficultySetter;
     public float enemyModifier = 1;
 
@@ -41,6 +41,18 @@ public class Pet : MonoBehaviour
             }
             return attack + modifier;
         }
+    }
+
+    public float getAdvanced()
+    {
+        float tmp = GetAttack() * 0.5f;
+        return GetAttack() + tmp;
+    }
+
+    public float getUltimate()
+    {
+        float tmp = GetAttack() * 0.75f;
+        return GetAttack() + tmp;
     }
 
     public void DiffChecker()

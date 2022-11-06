@@ -22,19 +22,23 @@ public class Pet : MonoBehaviour
         DiffChecker();
         System.Random random = new System.Random();
         int playerChance = random.Next(0, 100);
-        if (gameObject.CompareTag("Enemy") && criticalChance > playerChance)
-        {
-            return (attack + modifier) * 1.5f * enemyModifier;
-        }
-        if (criticalChance > playerChance)
-        {
-            return (attack + modifier) * 1.5f;
-        }
         if (gameObject.CompareTag("Enemy"))
         {
-            return (attack + modifier) * enemyModifier;
+            if(criticalChance > playerChance)
+            {
+                return (attack + modifier) * 1.5f * enemyModifier;
+            }
+            else
+            {
+                return (attack + modifier) * enemyModifier;
+            }
         }
-        else { 
+        else
+        {
+            if (criticalChance > playerChance)
+            {
+                return (attack + modifier) * 1.5f;
+            }
             return attack + modifier;
         }
     }

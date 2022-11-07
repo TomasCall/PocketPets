@@ -6,52 +6,68 @@ using UnityEngine;
 public class Pet : MonoBehaviour
 {
     public int level;
-    public double maxHealth;
-    public double health;
-    public double attack;
-    public double modifier;
+    public float maxHealth;
+    public float health;
+    public float attack;
+    public float modifier;
     public double criticalChance;
     public List<string> items;
-
+    public float mana;
     private DifficultySetter difficultySetter;
-    public double enemyModifier = 1;
+    public float enemyModifier = 1;
 
 
-    public double GetAttack()
+    public float GetAttack()
     {
         DiffChecker();
         System.Random random = new System.Random();
         int playerChance = random.Next(0, 100);
-        if (gameObject.CompareTag("Enemy") && criticalChance > playerChance)
-        {
-            return (attack + modifier) * 1.5 * enemyModifier;
-        }
-        if (criticalChance > playerChance)
-        {
-            return (attack + modifier) * 1.5;
-        }
         if (gameObject.CompareTag("Enemy"))
         {
-            return (attack + modifier) * enemyModifier;
+            if(criticalChance > playerChance)
+            {
+                return (attack + modifier) * 1.5f * enemyModifier;
+            }
+            else
+            {
+                return (attack + modifier) * enemyModifier;
+            }
         }
-        else { 
+        else
+        {
+            if (criticalChance > playerChance)
+            {
+                return (attack + modifier) * 1.5f;
+            }
             return attack + modifier;
         }
+    }
+
+    public float getAdvanced()
+    {
+        float tmp = GetAttack() * 0.5f;
+        return GetAttack() + tmp;
+    }
+
+    public float getUltimate()
+    {
+        float tmp = GetAttack() * 0.75f;
+        return GetAttack() + tmp;
     }
 
     public void DiffChecker()
     {
         if (DifficultySetter.isDiffEasy == true)
         {
-            enemyModifier = 0.75;
+            enemyModifier = 0.75f;
         }
         if (DifficultySetter.isDiffNormal == true)
         {
-            enemyModifier = 1;
+            enemyModifier = 1f;
         }
         if (DifficultySetter.isDiffHard == true)
         {
-            enemyModifier = 1.25;
+            enemyModifier = 1.25f;
         }
     }
 
@@ -77,7 +93,7 @@ public class Pet : MonoBehaviour
         }
     }
 
-    public void TakeDamage(double damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
     }

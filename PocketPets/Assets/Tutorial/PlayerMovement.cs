@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     public GameObject player;
     public Transform teleportPoint;
+    public Animator animator;
 
     public float speed = 1.0f;
 
@@ -32,6 +33,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right * x + transform.up * y;
 
         controller.Move(move * speed * Time.deltaTime);
+
+        animator.SetFloat("Horizontal", move.x);
+        animator.SetFloat("Vertical", move.y);
+        animator.SetFloat("Speed", move.sqrMagnitude);
+
+
     }
 
     private void OnTriggerEnter(Collider other)

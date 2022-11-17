@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -11,10 +9,7 @@ public class OptionsMenu : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI volumeTextUI = null;
 
-    private void Start() //betölti az elõzõleg elmentett hangerõt megnyitáskor
-    {
-        LoadValues();
-    }
+    public AudioMixer audioMixer;
 
     public void VolumeSlider(float volume)
     {
@@ -27,6 +22,12 @@ public class OptionsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("VolumeValue", volumeValue);
         LoadValues();
     }
+    public void SetVolume(float volume)
+    {
+        //az audiomixer paramétereinek ráhookolása kóddal hogy lehessen mozhatni a sliderrel
+        audioMixer.SetFloat("volume", volume);
+        Debug.Log(volume);
+    }
 
     public void LoadValues()
     {
@@ -36,62 +37,11 @@ public class OptionsMenu : MonoBehaviour
         audioMixer.SetFloat("VolumeValue", volumeValue);
     }
 
-    public AudioMixer audioMixer;
 
-	public Toggle fullscreenToggle;
 
-	public Dropdown resolutionDropdown;
-	Resolution[] resolutions;
-
-    void Start()
-	{
-		if (Screen.fullScreen != true)
-		{
-            fullscreenToggle.isOn = false;
-
-		}
-		else
-		{
-			fullscreenToggle.isOn = true;
-		}
-		resolutions = Screen.resolutions;
-
-        resolutionDropdown.ClearOptions();
-
-		List<string> options = new List<string>();
-
-		int currentResolutionIndex = 0;
-		for (int i = 0; i < resolutions.Length; i++)
-		{
-			string option = resolutions[i].width + "x" + resolutions[i].height + " @ " + resolutions[i].refreshRate + "hz";
-			options.Add(option);
-
-			if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-			{
-				currentResolutionIndex = i;
-			}
-		}
-
-		resolutionDropdown.AddOptions(options);
-		resolutionDropdown.value = currentResolutionIndex;
-		resolutionDropdown.RefreshShownValue();
-	}
-
-	public void SetResolution(int resolutionIndex)
-	{
-		Resolution resolution = resolutions[resolutionIndex];
-		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-	}
-	public void SetVolume(float volume)
+    void Start() //betölti az elõzõleg elmentett hangerõt megnyitáskor és feltölti a resolution beállításokat.
     {
-        //az audiomixer paramétereinek ráhookolása kóddal hogy lehessen mozhatni a sliderrel
-        audioMixer.SetFloat("volume", volume);
-        Debug.Log(volume);
-    }
+        LoadValues();
 
-    public void SetFullscreen(bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
-    }
-
+	}
 }

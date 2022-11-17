@@ -1,13 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using TMPro;
 using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-	public AudioMixer audioMixer;
+    [SerializeField] private Slider volumeSlider = null;
+
+    [SerializeField] private TextMeshProUGUI volumeTextUI = null;
+
+    private void Start() //betölti az elõzõleg elmentett hangerõt megnyitáskor
+    {
+        LoadValues();
+    }
+
+    public void VolumeSlider(float volume)
+    {
+        volumeTextUI.text = volume.ToString("0.0");
+    }
+
+    public void SetVolumeButton()
+    {
+        float volumeValue = volumeSlider.value;
+        PlayerPrefs.SetFloat("VolumeValue", volumeValue);
+        LoadValues();
+    }
+
+    public void LoadValues()
+    {
+        float volumeValue = PlayerPrefs.GetFloat("VolumeValue");
+        volumeSlider.value = volumeValue;
+        //AudioListener.volume = volumeValue;
+        audioMixer.SetFloat("VolumeValue", volumeValue);
+    }
+
+    public AudioMixer audioMixer;
 
 	public Toggle fullscreenToggle;
 

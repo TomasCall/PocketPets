@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -11,10 +9,7 @@ public class OptionsMenu : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI volumeTextUI = null;
 
-    private void Start() //betölti az elõzõleg elmentett hangerõt megnyitáskor
-    {
-        LoadValues();
-    }
+    public AudioMixer audioMixer;
 
     public void VolumeSlider(float volume)
     {
@@ -27,6 +22,12 @@ public class OptionsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("VolumeValue", volumeValue);
         LoadValues();
     }
+    public void SetVolume(float volume)
+    {
+        //az audiomixer paramétereinek ráhookolása kóddal hogy lehessen mozhatni a sliderrel
+        audioMixer.SetFloat("volume", volume);
+        Debug.Log(volume);
+    }
 
     public void LoadValues()
     {
@@ -36,15 +37,11 @@ public class OptionsMenu : MonoBehaviour
         audioMixer.SetFloat("VolumeValue", volumeValue);
     }
 
-    public AudioMixer audioMixer;
 
 
-    /*
-    public void SetVolume(float volume)
+    void Start() //betölti az elõzõleg elmentett hangerõt megnyitáskor és feltölti a resolution beállításokat.
     {
-        //az audiomixer paramétereinek ráhookolása kóddal hogy lehessen mozhatni a sliderrel
-        audioMixer.SetFloat("volume", volume);
-        Debug.Log(volume);
-    }
-    */
+        LoadValues();
+
+	}
 }

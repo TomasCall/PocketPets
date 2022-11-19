@@ -3,8 +3,9 @@
     "",
     "\\PocketPets",
     "\\PocketPets\\Assets",
-    "\\PocketPets\\Assets\\CombatFiles"
+    "\\PocketPets\\Assets\\CombatFiles",
+    "\\PocketPets\\Assets\\MenuFiles"
   ],
-  "SelectedNode": "\\PocketPets\\Assets\\CombatFiles\\BattleSystem.cs",
+  "SelectedNode": "\\PocketPets\\Assets\\CombatFiles\\EnemyScript.cs",
   "PreviewInSolutionExplorer": false
 }

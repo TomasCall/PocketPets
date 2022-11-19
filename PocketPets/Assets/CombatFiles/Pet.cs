@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,19 +11,21 @@ public class Pet : MonoBehaviour
     public float modifier;
     public double criticalChance;
     public List<string> items;
+
+    public float enemyModifier = 1f;
     public float mana;
-    private DifficultySetter difficultySetter;
-    public float enemyModifier = 1;
 
-
-    public float GetAttack()
+    private void Start()
     {
         DiffChecker();
+    }
+    public float GetAttack()
+    {
         System.Random random = new System.Random();
         int playerChance = random.Next(0, 100);
         if (gameObject.CompareTag("Enemy"))
         {
-            if(criticalChance > playerChance)
+            if (criticalChance > playerChance)
             {
                 return (attack + modifier) * 1.5f * enemyModifier;
             }
@@ -57,15 +58,15 @@ public class Pet : MonoBehaviour
 
     public void DiffChecker()
     {
-        if (DifficultySetter.isDiffEasy == true)
+        if (MainMenu.isDiffEasy == true)
         {
             enemyModifier = 0.75f;
         }
-        if (DifficultySetter.isDiffNormal == true)
+        if (MainMenu.isDiffNormal == true)
         {
             enemyModifier = 1f;
         }
-        if (DifficultySetter.isDiffHard == true)
+        if (MainMenu.isDiffHard == true)
         {
             enemyModifier = 1.25f;
         }

@@ -5,16 +5,39 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void StartNewGame()
+    public static bool isDiffEasy;
+    public static bool isDiffNormal;
+    public static bool isDiffHard;
+    
+    public void StartTheGame()
     {
-        //betölti a soron következõ scene-t
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.LoadScene("Game");
     }
 
-    public void StartTutorial()
+    public void StartTheTutorial()
     {
         SceneManager.LoadScene("Tutorial");
+    }
+
+    public void PlayEasy()
+    {
+        isDiffEasy = true;
+        isDiffNormal = false;
+        isDiffHard = false;
+    }
+
+    public void PlayNormal()
+    {
+        isDiffEasy = false;
+        isDiffNormal = true;
+        isDiffHard = false;
+    }
+
+    public void PlayHard()
+    {
+        isDiffEasy = false;
+        isDiffNormal = false;
+        isDiffHard = true;
     }
 
     public void ExitGame()

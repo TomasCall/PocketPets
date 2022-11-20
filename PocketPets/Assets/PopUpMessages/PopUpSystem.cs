@@ -9,6 +9,8 @@ public class PopUpSystem : MonoBehaviour
     public Animator animator;
     public TMP_Text popUpText;
 
+    public BoxCollider PopUpCollider;
+
     public void PopUp(string text)
     {
         popUpBox.SetActive(true);
@@ -24,5 +26,7 @@ public class PopUpSystem : MonoBehaviour
 
         // leveszi a colidert az adott GameObject-rõl
         //this.GetComponent<BoxCollider>().enabled = false;
+        if (collision = PopUpCollider)
+            PopUpCollider.enabled = false;
     }
 }

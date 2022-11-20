@@ -2101,7 +2101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560717944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8478, y: -2.01, z: 0}
+  m_LocalPosition: {x: -2.86, y: -2.33, z: 0}
   m_LocalScale: {x: 2.9261162, y: 0.34933254, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2204,6 +2204,7 @@ MonoBehaviour:
   popUpBox: {fileID: 1312681276}
   animator: {fileID: 1312681278}
   popUpText: {fileID: 1429994484}
+  PopUpCollider: {fileID: 560717948}
   popUp: Check what's outside. Go and find the door.
 --- !u!1 &570170680
 GameObject:
@@ -2853,7 +2854,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767622634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.85, y: -1.41, z: 0}
+  m_LocalPosition: {x: -2.85, y: -1.44, z: 0}
   m_LocalScale: {x: 0.4854494, y: 0.46916416, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2875,6 +2876,7 @@ MonoBehaviour:
   popUpBox: {fileID: 1312681276}
   animator: {fileID: 1312681278}
   popUpText: {fileID: 1429994484}
+  PopUpCollider: {fileID: 767622638}
   popUp: You can move around with WASD.
 --- !u!54 &767622637
 Rigidbody:
@@ -6921,8 +6923,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906509128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6078, y: -17.0883, z: 0}
-  m_LocalScale: {x: 0.3809807, y: 3.2371037, z: 1}
+  m_LocalPosition: {x: 1.6078, y: -16.9349, z: 0}
+  m_LocalScale: {x: 0.3809807, y: 2.7839236, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1269124959}
@@ -6943,6 +6945,7 @@ MonoBehaviour:
   popUpBox: {fileID: 1312681276}
   animator: {fileID: 1312681278}
   popUpText: {fileID: 1429994484}
+  PopUpCollider: {fileID: 1906509132}
   popUp: There is your first enemy. Get ready for battle!
 --- !u!54 &1906509131
 Rigidbody:

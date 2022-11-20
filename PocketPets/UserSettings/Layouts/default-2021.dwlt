@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 421}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 110
+  controlID: 78
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -706,10 +706,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 55}
-      m_SelectedIDs: 
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: e8570000
       m_LastClickedID: 0
-      m_ExpandedIDs: 2afbffff6e530000d0530000105400009a540000ae540000
+      m_ExpandedIDs: b6f0ffff1af6ffff1ef6ffffaef6ffff2cf9ffff2afbffffb07200003a7300004e730000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -980,9 +980,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 5.9460464, y: -7.542836, z: 14.923378}
+    m_Target: {x: 2.2473366, y: 6.0026345, z: 13.375644}
     speed: 2
-    m_Value: {x: 5.9460464, y: -7.542836, z: 14.923378}
+    m_Value: {x: 2.2473366, y: 6.0026345, z: 13.375644}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1033,9 +1033,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 4.4737825
+    m_Target: 2.8320045
     speed: 2
-    m_Value: 4.4737825
+    m_Value: 2.8320045
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1101,22 +1101,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/PopUpMessages
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/PopUpMessages
+  - Assets/Scenes
   m_LastFoldersGridSize: 64
   m_LastProjectPath: C:\Users\Admin\Desktop\asd\PocketPets
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 61}
-    m_SelectedIDs: c4570000
-    m_LastClickedID: 22468
-    m_ExpandedIDs: 00000000b057000000ca9a3b
+    m_SelectedIDs: d2570000
+    m_LastClickedID: 22482
+    m_ExpandedIDs: 00000000ba57000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1144,7 +1144,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b0570000
+    m_ExpandedIDs: 00000000ba570000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

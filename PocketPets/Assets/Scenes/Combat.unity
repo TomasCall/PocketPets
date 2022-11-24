@@ -2642,8 +2642,8 @@ MonoBehaviour:
   items:
   - a+13
   - h+13
-  mana: 0
   enemyModifier: 0
+  mana: 0
 --- !u!4 &1166531738
 Transform:
   m_ObjectHideFlags: 0
@@ -3049,8 +3049,8 @@ MonoBehaviour:
   items:
   - a+13
   - h+13
-  mana: 0
   enemyModifier: 0
+  mana: 0
 --- !u!1 &1353115354
 GameObject:
   m_ObjectHideFlags: 0
@@ -4158,6 +4158,7 @@ MonoBehaviour:
   ResultText: {fileID: 707589956}
   playerManeBar: {fileID: 1216885931}
   enemyManaBar: {fileID: 621209111}
+  Fader: {fileID: 1223012386}
 --- !u!4 &1950833243
 Transform:
   m_ObjectHideFlags: 0
@@ -4361,8 +4362,8 @@ MonoBehaviour:
   items:
   - a+13
   - h+13
-  mana: 0
   enemyModifier: 0
+  mana: 0
 --- !u!1 &2059778760
 GameObject:
   m_ObjectHideFlags: 0

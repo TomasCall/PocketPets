@@ -24,6 +24,12 @@ public class BattleSystem : MonoBehaviour
     public GameObject playerManeBar;
     public GameObject enemyManaBar;
 
+    [SerializeField] Animator animator1;
+    [SerializeField] Animator animator2;
+
+    [SerializeField] TextMeshProUGUI EnemyHP;
+    [SerializeField] TextMeshProUGUI PlayerHP;
+
     private float playerAttack;
 
     void Start()
@@ -49,8 +55,12 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.ENEMYS_TURN;
             enemy.TakeDamage(playerAttack);
+            EnemySetHealthPoints(enemy.health);
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+            animator1.SetBool("EnemyHurt", true);
             enemyHealth.GetComponent<Slider>().value = enemy.health;
+            yield return new WaitForSeconds(1f);
+            animator1.SetBool("EnemyHurt", false);
             yield return new WaitForSeconds(2f);
             if(enemy.health <= 0)
             {
@@ -106,8 +116,12 @@ public class BattleSystem : MonoBehaviour
                 enemyManaBar.GetComponent<Slider>().value = enemy.mana;
 
                 player.TakeDamage(enemy.getUltimate());
+                PlayerSetHealthPoints(player.health);
                 playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                animator2.SetBool("PlayerHurt", true);
                 playerHealth.GetComponent<Slider>().value = player.health;
+                yield return new WaitForSeconds(1f);
+                animator2.SetBool("PlayerHurt", false);
                 yield return new WaitForSeconds(2f);
                 playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
             } else if(enemy.mana == 2f && number%2==0)
@@ -116,8 +130,12 @@ public class BattleSystem : MonoBehaviour
                 enemyManaBar.GetComponent<Slider>().value = enemy.mana;
 
                 player.TakeDamage(enemy.getAdvanced());
+                PlayerSetHealthPoints(player.health);
                 playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                animator2.SetBool("PlayerHurt", true);
                 playerHealth.GetComponent<Slider>().value = player.health;
+                yield return new WaitForSeconds(1f);
+                animator2.SetBool("PlayerHurt", false);
                 yield return new WaitForSeconds(2f);
                 playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
             } 
@@ -127,13 +145,18 @@ public class BattleSystem : MonoBehaviour
                 enemyManaBar.GetComponent<Slider>().value = enemy.mana;
 
                 player.TakeDamage(enemy.GetAttack());
+                PlayerSetHealthPoints(player.health);
                 playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                animator2.SetBool("PlayerHurt", true);
                 playerHealth.GetComponent<Slider>().value = player.health;
+                yield return new WaitForSeconds(1f);
+                animator2.SetBool("PlayerHurt", false);
                 yield return new WaitForSeconds(2f);
                 playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
-        if(player.health <= 0)
+        
+        if (player.health <= 0)
         {
             state = BattleState.LOST;
             ShowEndGameDialog();
@@ -291,6 +314,24 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(Turn());
         }
     }
+
+    public void PlayerSetHealthPoints(float health)
+    {
+        PlayerHP.text = health.ToString("0");
+    }
+
+    public void EnemySetHealthPoints(float health)
+    {
+        EnemyHP.text = health.ToString("0");
+    }
+
+    //Aktívra állítja a fader-t sceenre való belépéskor
+    //(gyakran inaktívra lett állítva mert kitakarja aképet és nem lehet vele dolgozni olyankor, viszont úgy meg inaktívon lett sokszor felejtve)
+    public GameObject Fader;
+    private void Awake()
+    {
+        Fader.SetActive(true);
+    }
 }
 
 public enum BattleState
@@ -301,3 +342,5 @@ public enum BattleState
     WON,
     LOST
 }
+
+

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class Pet : MonoBehaviour
 {
@@ -97,5 +98,25 @@ public class Pet : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        PlayerSetFloatingTextToDMG(damage);
+        EnemySetFloatingTextToDMG(damage);
+    }
+
+    [SerializeField] private TextMeshProUGUI PlayerfloatingText;
+    [SerializeField] private TextMeshProUGUI EnemyfloatingText;
+    public void PlayerSetFloatingTextToDMG(float text)
+    {
+        if (PlayerfloatingText) 
+        {
+            PlayerfloatingText.text = text.ToString("-" + "0");
+        }
+    }
+
+    public void EnemySetFloatingTextToDMG(float text)
+    {
+        if (EnemyfloatingText)
+        {
+            EnemyfloatingText.text = text.ToString("-" + "0");
+        }
     }
 }

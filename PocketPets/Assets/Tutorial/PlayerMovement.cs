@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         inventory.CreateInventory();
+        transform.position = new Vector3(PositionTransporter.playerPositionX, PositionTransporter.playerPositionY, 0f);
     }
 
     void Update()

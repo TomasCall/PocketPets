@@ -23,6 +23,7 @@ public class BattleSystem : MonoBehaviour
     public TextMeshProUGUI ResultText;
     public GameObject playerManeBar;
     public GameObject enemyManaBar;
+    public GameObject manaHealthTexts;
 
     [SerializeField] Animator animator1;
     [SerializeField] Animator animator2;
@@ -72,8 +73,11 @@ public class BattleSystem : MonoBehaviour
                 ShowEndGameDialog();
             }
         }
-        enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
-        StartCoroutine(EnemyTurn());
+        if(state != BattleState.WON)
+        {
+            enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            StartCoroutine(EnemyTurn());
+        }
     }
 
     IEnumerator EnemyTurn()
@@ -226,8 +230,9 @@ public class BattleSystem : MonoBehaviour
 
     public void ClickOnUseItemButton()
     {
-        if(player.items.Count() != 0)
+        if(player.items.Count() != 0 && state == BattleState.PLAYERS_TURN)
         {
+            state = BattleState.ENEMYS_TURN;
             if (player.mana < 3f)
             {
                 player.mana++;
@@ -292,6 +297,9 @@ public class BattleSystem : MonoBehaviour
         EndGameDialog.SetActive(true);
         playerHealth.SetActive(false);
         enemyHealth.SetActive(false);
+        playerManeBar.SetActive(false);
+        enemyManaBar.SetActive(false);
+        manaHealthTexts.SetActive(false);
         if(state == BattleState.WON)
         {
             ResultText.text = "You won the battle";
@@ -304,7 +312,7 @@ public class BattleSystem : MonoBehaviour
 
     public void ClickOnContinueButton()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Game");
     }
 
     public void clickOnAdvancedButton()

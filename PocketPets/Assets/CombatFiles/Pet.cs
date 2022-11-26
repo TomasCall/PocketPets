@@ -87,6 +87,8 @@ public class Pet : MonoBehaviour
             if(maxHealth > modifier + health)
             {
                 health += modifier;
+                PlayerSetFloatingTextToHeal(modifier);
+                EnemySetFloatingTextToHeal(modifier);
             }
             else
             {

@@ -309,7 +309,15 @@ public class BattleSystem : MonoBehaviour
         manaHealthTexts.SetActive(false);
         if(state == BattleState.WON)
         {
-            ResultText.text = "You won the battle";
+            if (DataTransfer.defeatedEnemies.Where(x => x == true).Count() == DataTransfer.defeatedEnemies.Length)
+            {
+                ResultText.text = "You won the game!";
+            }
+            else
+            {
+                ResultText.text = "You won the battle!";
+            }
+
             if(!DataTransfer.isTutorial)
             {
                 DataTransfer.defeatedEnemies[DataTransfer.currentEnemyIndex] = true;
@@ -317,7 +325,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            ResultText.text = "You lost the battle";
+            ResultText.text = "You lost the battle!";
         }
     }
 

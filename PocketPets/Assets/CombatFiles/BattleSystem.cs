@@ -26,6 +26,10 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] Animator animator1;
     [SerializeField] Animator animator2;
+    [SerializeField] Animator animator3;
+    [SerializeField] Animator animator4;
+    [SerializeField] Animator animator5;
+    [SerializeField] Animator animator6;
 
     [SerializeField] TextMeshProUGUI EnemyHP;
     [SerializeField] TextMeshProUGUI PlayerHP;
@@ -88,10 +92,13 @@ public class BattleSystem : MonoBehaviour
             string item = enemy.items.Where(x => x.Contains("h")).ToList()[0].ToString();
             enemy.UseItem(item);
             enemy.items.Remove(item);
+            EnemySetHealthPoints(enemy.health);
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+            animator3.SetBool("EnemyHealing", true);
             enemyHealth.GetComponent<Slider>().value = enemy.health;
             yield return new WaitForSeconds(2f);
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            animator3.SetBool("EnemyHealing", false);
         } // If the random number is less then 50 and enemy has attack modider it uses it
         else if (number<= 40 && enemy.items.Where(x=>x.Contains("a")).Count() >= 1)
         {
@@ -105,7 +112,9 @@ public class BattleSystem : MonoBehaviour
             enemy.UseItem(item);
             enemy.items.Remove(item);
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+            animator5.SetBool("EnemyBoost", true);
             yield return new WaitForSeconds(2f);
+            animator5.SetBool("EnemyBoost", false);
             enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
         }//Enemy attacks
         else
@@ -237,12 +246,15 @@ public class BattleSystem : MonoBehaviour
         if (player.items[index].Contains("a"))
         {   
             playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+            animator6.SetBool("PlayerBoost", true);
             player.UseItem(item);
             player.items.Remove(item);
         }
         else
         {
+            PlayerSetHealthPoints(player.health);
             playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+            animator4.SetBool("PlayerHealing", true);
             player.UseItem(item);
             player.items.Remove(item);
             playerHealth.GetComponent<Slider>().value = player.health;
@@ -251,6 +263,8 @@ public class BattleSystem : MonoBehaviour
         //Resetting the player object color
         yield return new WaitForSeconds(2f);
         playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+        animator6.SetBool("PlayerBoost", false);
+        animator4.SetBool("PlayerHealing", false);
 
         index = 0;
         state = BattleState.ENEMYS_TURN;
@@ -325,13 +339,6 @@ public class BattleSystem : MonoBehaviour
         EnemyHP.text = health.ToString("0");
     }
 
-    //Aktívra állítja a fader-t sceenre való belépéskor
-    //(gyakran inaktívra lett állítva mert kitakarja aképet és nem lehet vele dolgozni olyankor, viszont úgy meg inaktívon lett sokszor felejtve)
-    public GameObject Fader;
-    private void Awake()
-    {
-        Fader.SetActive(true);
-    }
     //Aktívra állítja a fader-t sceenre való belépéskor
     //(gyakran inaktívra lett állítva mert kitakarja aképet és nem lehet vele dolgozni olyankor, viszont úgy meg inaktívon lett sokszor felejtve)
     public GameObject Fader;

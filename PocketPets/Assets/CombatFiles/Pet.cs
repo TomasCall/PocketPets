@@ -104,6 +104,9 @@ public class Pet : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI PlayerfloatingText;
     [SerializeField] private TextMeshProUGUI EnemyfloatingText;
+    [SerializeField] private TextMeshProUGUI PlayerfloatingTextHeal;
+    [SerializeField] private TextMeshProUGUI EnemyfloatingTextHeal;
+
     public void PlayerSetFloatingTextToDMG(float text)
     {
         if (PlayerfloatingText) 
@@ -117,6 +120,22 @@ public class Pet : MonoBehaviour
         if (EnemyfloatingText)
         {
             EnemyfloatingText.text = text.ToString("-" + "0");
+        }
+    }
+
+    public void PlayerSetFloatingTextToHeal(float text)
+    {
+        if (PlayerfloatingTextHeal) 
+        {
+            PlayerfloatingTextHeal.text = text.ToString("+" + "0");
+        }
+    }
+
+    public void EnemySetFloatingTextToHeal(float text)
+    {
+        if (EnemyfloatingTextHeal)
+        {
+            EnemyfloatingTextHeal.text = text.ToString("+" + "0");
         }
     }
 }

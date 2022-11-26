@@ -332,6 +332,13 @@ public class BattleSystem : MonoBehaviour
     {
         Fader.SetActive(true);
     }
+    //Aktívra állítja a fader-t sceenre való belépéskor
+    //(gyakran inaktívra lett állítva mert kitakarja aképet és nem lehet vele dolgozni olyankor, viszont úgy meg inaktívon lett sokszor felejtve)
+    public GameObject Fader;
+    private void Awake()
+    {
+        Fader.SetActive(true);
+    }
 }
 
 public enum BattleState

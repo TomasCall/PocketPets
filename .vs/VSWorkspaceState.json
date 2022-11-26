@@ -4,6 +4,7 @@
     "\\PocketPets",
     "\\PocketPets\\Assets",
     "\\PocketPets\\Assets\\CombatFiles",
+    "\\PocketPets\\Assets\\LeanTween",
     "\\PocketPets\\Assets\\MenuFiles"
   ],
   "SelectedNode": "\\PocketPets\\Assets\\CombatFiles\\Pet.cs",

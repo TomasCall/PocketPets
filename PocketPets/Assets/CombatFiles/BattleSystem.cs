@@ -252,12 +252,12 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            PlayerSetHealthPoints(player.health);
             playerGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
             animator4.SetBool("PlayerHealing", true);
             player.UseItem(item);
             player.items.Remove(item);
             playerHealth.GetComponent<Slider>().value = player.health;
+            PlayerSetHealthPoints(player.health);
         }
 
         //Resetting the player object color

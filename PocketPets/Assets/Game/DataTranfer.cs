@@ -9,5 +9,4 @@ public static class DataTransfer
     //The order: Fish, Cat, Dog, Panda
     public static bool[] defeatedEnemies = {false, false, false, false };
     public static int currentEnemyIndex = 0;
-    public static string[] enemies = {"fish", "cica", "doggo", "panda" };
 }

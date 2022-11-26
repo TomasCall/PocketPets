@@ -24,6 +24,7 @@ public class BattleSystem : MonoBehaviour
     public GameObject playerManeBar;
     public GameObject enemyManaBar;
     public GameObject manaHealthTexts;
+    public List<Sprite> sprites;
 
     [SerializeField] Animator animator1;
     [SerializeField] Animator animator2;
@@ -39,6 +40,10 @@ public class BattleSystem : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(sprites.Count);
+        Sprite s = sprites[DataTransfer.currentEnemyIndex];
+        GameObject.Find("enemySprite").GetComponent<SpriteRenderer>().sprite = s;
+
         playerManeBar.GetComponent<Slider>().value = 0f;
         enemyManaBar.GetComponent<Slider>().value = 0f;
 
@@ -303,6 +308,7 @@ public class BattleSystem : MonoBehaviour
         if(state == BattleState.WON)
         {
             ResultText.text = "You won the battle";
+            DataTransfer.defeatedEnemies[DataTransfer.currentEnemyIndex] = true;
         }
         else
         {

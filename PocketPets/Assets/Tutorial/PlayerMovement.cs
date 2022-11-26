@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         inventory.CreateInventory();
-        transform.position = new Vector3(PositionTransporter.playerPositionX, PositionTransporter.playerPositionY, 0f);
+        transform.position = new Vector3(DataTransfer.playerPositionX, DataTransfer.playerPositionY, 0f);
     }
 
     void Update()
@@ -79,6 +79,31 @@ public class PlayerMovement : MonoBehaviour
             inventory.inventory.Add("h+5");
             Debug.Log("Picked up item: h+5");
             handleTextFile.WriteString();
+        }
+
+        if (other.gameObject.CompareTag("Fish"))
+        {
+            DataTransfer.currentEnemyIndex = 0;
+            DataTransfer.playerPositionX = -65.1112f;
+            DataTransfer.playerPositionY = 95.15679f;
+        }
+        if (other.gameObject.CompareTag("Cica"))
+        {
+            DataTransfer.currentEnemyIndex = 1;
+            DataTransfer.playerPositionX = 621.2276f;
+            DataTransfer.playerPositionY = -499.2258f;
+        }
+        if (other.gameObject.CompareTag("Doggo"))
+        {
+            DataTransfer.currentEnemyIndex = 2;
+            DataTransfer.playerPositionX = -749.2672f;
+            DataTransfer.playerPositionY = 323.6138f;
+        }
+        if (other.gameObject.CompareTag("Panda"))
+        {
+            DataTransfer.currentEnemyIndex = 3;
+            DataTransfer.playerPositionX = 739.9427f;
+            DataTransfer.playerPositionY = 357.8624f;
         }
     }
     IEnumerator Teleporting() {

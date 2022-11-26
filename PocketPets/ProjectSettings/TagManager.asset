@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Exit
   - Enemy
+  - PopUpTrigger
+  - 5Damage
+  - 13Damage
+  - 5Health
+  - 13Health
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class Pet : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class Pet : MonoBehaviour
     private void Start()
     {
         DiffChecker();
+        if (gameObject.CompareTag("Player"))
+        {
+            items = File.ReadAllLines("Assets/Data/inventory.txt").ToList();
+        }
     }
     public float GetAttack()
     {
@@ -83,12 +89,16 @@ public class Pet : MonoBehaviour
         } 
         else 
         {
-            if(maxHealth > modifier + health)
+            if (maxHealth > valueOfItem + health)
             {
-                health += modifier;
+                health += valueOfItem;
+                PlayerSetFloatingTextToHeal(valueOfItem);
+                EnemySetFloatingTextToHeal(valueOfItem);
             }
             else
             {
+                PlayerSetFloatingTextToHeal(maxHealth-health);
+                EnemySetFloatingTextToHeal(maxHealth-health);
                 health = maxHealth;
             }
         }
@@ -97,5 +107,44 @@ public class Pet : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        PlayerSetFloatingTextToDMG(damage);
+        EnemySetFloatingTextToDMG(damage);
+    }
+
+    [SerializeField] private TextMeshProUGUI PlayerfloatingText;
+    [SerializeField] private TextMeshProUGUI EnemyfloatingText;
+    [SerializeField] private TextMeshProUGUI PlayerfloatingTextHeal;
+    [SerializeField] private TextMeshProUGUI EnemyfloatingTextHeal;
+
+    public void PlayerSetFloatingTextToDMG(float text)
+    {
+        if (PlayerfloatingText) 
+        {
+            PlayerfloatingText.text = text.ToString("-" + "0");
+        }
+    }
+
+    public void EnemySetFloatingTextToDMG(float text)
+    {
+        if (EnemyfloatingText)
+        {
+            EnemyfloatingText.text = text.ToString("-" + "0");
+        }
+    }
+
+    public void PlayerSetFloatingTextToHeal(float text)
+    {
+        if (PlayerfloatingTextHeal) 
+        {
+            PlayerfloatingTextHeal.text = text.ToString("+" + "0");
+        }
+    }
+
+    public void EnemySetFloatingTextToHeal(float text)
+    {
+        if (EnemyfloatingTextHeal)
+        {
+            EnemyfloatingTextHeal.text = text.ToString("+" + "0");
+        }
     }
 }

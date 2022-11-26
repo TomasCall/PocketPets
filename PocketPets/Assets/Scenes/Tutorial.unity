@@ -436,6 +436,8 @@ MonoBehaviour:
   player: {fileID: 221428309}
   teleportPoint: {fileID: 434760013}
   animator: {fileID: 0}
+  inventory: {fileID: 0}
+  handleTextFile: {fileID: 0}
   speed: 2
 --- !u!54 &221428313
 Rigidbody:
@@ -6693,6 +6695,18 @@ PrefabInstance:
     - target: {fileID: 3292951868643492728, guid: 4987306e636209e4ebd5c2586c3b3436, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 3292951869343040685, guid: 4987306e636209e4ebd5c2586c3b3436, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3292951869343040685, guid: 4987306e636209e4ebd5c2586c3b3436, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3292951869343040685, guid: 4987306e636209e4ebd5c2586c3b3436, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3292951870040155572, guid: 4987306e636209e4ebd5c2586c3b3436, type: 3}
       propertyPath: m_Name

@@ -11,16 +11,16 @@ public class PlayerMovement : MonoBehaviour
     public GameObject player;
     public Transform teleportPoint;
     public Animator animator;
-    public Inventory inventory;
-    public HandleTextFile handleTextFile;
 
     public float speed = 1.0f;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        inventory.CreateInventory();
-        transform.position = new Vector3(DataTransfer.playerPositionX, DataTransfer.playerPositionY, 0f);
+        if(!DataTransfer.isTutorial)
+        {
+            transform.position = new Vector3(DataTransfer.playerPositionX, DataTransfer.playerPositionY, 0f);
+        }
     }
 
     void Update()
@@ -58,28 +58,25 @@ public class PlayerMovement : MonoBehaviour
         //Inventory Management
         if (other.gameObject.CompareTag("13Damage"))
         {
-            inventory.inventory.Add("a+13");
+            DataTransfer.items.Add("a+13");
             Debug.Log("Picked up item: a+13");
-            handleTextFile.WriteString();
         }
         if (other.gameObject.CompareTag("5Damage"))
         {
-            inventory.inventory.Add("a+5");
+            DataTransfer.items.Add("a+5");
             Debug.Log("Picked up item: a+5");
-            handleTextFile.WriteString();
         }
         if (other.gameObject.CompareTag("13Health"))
         {
-            inventory.inventory.Add("h+13");
+            DataTransfer.items.Add("h+13");
             Debug.Log("Picked up item: h+13");
-            handleTextFile.WriteString();
         }
         if (other.gameObject.CompareTag("5Health"))
         {
-            inventory.inventory.Add("h+5");
+            DataTransfer.items.Add("h+5");
             Debug.Log("Picked up item: h+5");
-            handleTextFile.WriteString();
         }
+        Debug.Log(DataTransfer.items.Count);
 
         if (other.gameObject.CompareTag("Fish"))
         {

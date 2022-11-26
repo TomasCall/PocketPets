@@ -41,8 +41,10 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         Debug.Log(sprites.Count);
-        Sprite s = sprites[DataTransfer.currentEnemyIndex];
-        GameObject.Find("enemySprite").GetComponent<SpriteRenderer>().sprite = s;
+        if(!DataTransfer.isTutorial)
+        {
+            GameObject.Find("enemySprite").GetComponent<SpriteRenderer>().sprite = sprites[DataTransfer.currentEnemyIndex];
+        }
 
         playerManeBar.GetComponent<Slider>().value = 0f;
         enemyManaBar.GetComponent<Slider>().value = 0f;
@@ -308,7 +310,10 @@ public class BattleSystem : MonoBehaviour
         if(state == BattleState.WON)
         {
             ResultText.text = "You won the battle";
-            DataTransfer.defeatedEnemies[DataTransfer.currentEnemyIndex] = true;
+            if(!DataTransfer.isTutorial)
+            {
+                DataTransfer.defeatedEnemies[DataTransfer.currentEnemyIndex] = true;
+            }
         }
         else
         {
@@ -318,7 +323,14 @@ public class BattleSystem : MonoBehaviour
 
     public void ClickOnContinueButton()
     {
-        Invoke("LoadGame", 3f);
+        if (DataTransfer.defeatedEnemies.Where(x => x == true).Count() == DataTransfer.defeatedEnemies.Length)
+        {
+            Invoke("LoadMenuIfGameIsWon", 3f);
+        } 
+        else
+        {
+            Invoke("LoadGame", 3f);
+        }
     }
 
     public void clickOnAdvancedButton()
@@ -364,6 +376,11 @@ public class BattleSystem : MonoBehaviour
     private void LoadGame()
     {
         SceneManager.LoadScene("Game");
+    }
+
+    void LoadMenuIfGameIsWon()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
 

@@ -9,4 +9,6 @@ public static class DataTransfer
     //The order: Fish, Cat, Dog, Panda
     public static bool[] defeatedEnemies = {false, false, false, false };
     public static int currentEnemyIndex = 0;
+    public static List<string> items = new List<string>();
+    public static bool isTutorial = true;
 }

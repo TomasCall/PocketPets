@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Loader : MonoBehaviour
 {
     public List<GameObject> enemies;
+    public List<GameObject> animals;
 
     // Start is called before the first frame update
     void Start()
     {
         HideDefeatedEnemies();
+        DataTransfer.isTutorial = false;
     }
 
     // Update is called once per frame
@@ -25,6 +29,10 @@ public class Loader : MonoBehaviour
             if (DataTransfer.defeatedEnemies[i])
             {
                 enemies[i].SetActive(false);
+            }
+            else
+            {
+                animals[i].SetActive(false);
             }
         }
     }

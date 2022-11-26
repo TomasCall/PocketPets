@@ -318,7 +318,7 @@ public class BattleSystem : MonoBehaviour
 
     public void ClickOnContinueButton()
     {
-        SceneManager.LoadScene("Game");
+        Invoke("LoadGame", 3f);
     }
 
     public void clickOnAdvancedButton()
@@ -359,6 +359,11 @@ public class BattleSystem : MonoBehaviour
     private void Awake()
     {
         Fader.SetActive(true);
+    }
+
+    private void LoadGame()
+    {
+        SceneManager.LoadScene("Game");
     }
 }
 

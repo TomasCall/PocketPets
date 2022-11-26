@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ public class Pet : MonoBehaviour
     private void Start()
     {
         DiffChecker();
+        if (gameObject.CompareTag("Player"))
+        {
+            items = File.ReadAllLines("Assets/Data/inventory.txt").ToList();
+        }
     }
     public float GetAttack()
     {

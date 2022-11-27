@@ -37,10 +37,15 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] TextMeshProUGUI EnemyHP;
     [SerializeField] TextMeshProUGUI PlayerHP;
 
+    [SerializeField] Animator CombatEndAnim;
+
     private float playerAttack;
 
     void Start()
     {
+        //CombatEndAnim = GetComponent<Animator>();
+        CombatEndAnim.SetBool("CombatEnded", false);
+
         Debug.Log(sprites.Count);
         if(!DataTransfer.isTutorial)
         {
@@ -337,11 +342,13 @@ public class BattleSystem : MonoBehaviour
     {
         if (DataTransfer.defeatedEnemies.Where(x => x == true).Count() == DataTransfer.defeatedEnemies.Length)
         {
-            Invoke("LoadMenuIfGameIsWon", 3f);
+            CombatEndAnim.SetBool("CombatEnded", true);
+            Invoke("LoadMenuIfGameIsWon", 1.5f);
         } 
         else
         {
-            Invoke("LoadGame", 3f);
+            CombatEndAnim.SetBool("CombatEnded", true);
+            Invoke("LoadGame", 1.5f);
         }
     }
 

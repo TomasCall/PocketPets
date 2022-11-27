@@ -70,15 +70,15 @@ public class Pet : MonoBehaviour
     {
         if (MainMenu.isDiffEasy == true)
         {
-            enemyModifier = 0.75f;
+            enemyModifier = 0.25f;
         }
         if (MainMenu.isDiffNormal == true)
         {
-            enemyModifier = 1f;
+            enemyModifier = 0.5f;
         }
         if (MainMenu.isDiffHard == true)
         {
-            enemyModifier = 1.25f;
+            enemyModifier = 1f;
         }
     }
 

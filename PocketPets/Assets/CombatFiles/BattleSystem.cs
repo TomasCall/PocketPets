@@ -49,8 +49,13 @@ public class BattleSystem : MonoBehaviour
         Debug.Log(sprites.Count);
         if(!DataTransfer.isTutorial)
         {
+            itemSprites = new List<Sprite>();
             GameObject.Find("enemySprite").GetComponent<SpriteRenderer>().sprite = sprites[DataTransfer.currentEnemyIndex];
-            itemSprites = DataTransfer.itemSprites;
+            foreach(var itemOfItemSprites in DataTransfer.itemSprites)
+            {
+                itemSprites.Add(itemOfItemSprites);
+            }
+            ///itemSprites = DataTransfer.itemSprites;
         }
 
         playerManeBar.GetComponent<Slider>().value = 0f;

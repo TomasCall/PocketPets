@@ -16,13 +16,16 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyGameObject;
     public GameObject playerHealth;
     public GameObject enemyHealth;
-    public TextMeshProUGUI itemText;
+    public List<Sprite> itemSprites;
+    public GameObject item;
     int index;
     public GameObject EndGameDialog;
     public GameObject CombatPanel;
     public TextMeshProUGUI ResultText;
     public GameObject playerManeBar;
     public GameObject enemyManaBar;
+    public GameObject manaHealthTexts;
+    public List<Sprite> sprites;
 
     [SerializeField] Animator animator1;
     [SerializeField] Animator animator2;
@@ -38,6 +41,13 @@ public class BattleSystem : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(sprites.Count);
+        if(!DataTransfer.isTutorial)
+        {
+            GameObject.Find("enemySprite").GetComponent<SpriteRenderer>().sprite = sprites[DataTransfer.currentEnemyIndex];
+            itemSprites = DataTransfer.itemSprites;
+        }
+
         playerManeBar.GetComponent<Slider>().value = 0f;
         enemyManaBar.GetComponent<Slider>().value = 0f;
 
@@ -48,7 +58,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERS_TURN;
 
         index = 0;
-        itemText.text = player.items[index];
+        item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
 
         EndGameDialog.SetActive(false);
     }
@@ -72,8 +82,11 @@ public class BattleSystem : MonoBehaviour
                 ShowEndGameDialog();
             }
         }
-        enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
-        StartCoroutine(EnemyTurn());
+        if(state != BattleState.WON)
+        {
+            enemyGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            StartCoroutine(EnemyTurn());
+        }
     }
 
     IEnumerator EnemyTurn()
@@ -197,12 +210,12 @@ public class BattleSystem : MonoBehaviour
             if(index+1 >= player.items.Count())
             {
                 index = 0;
-                itemText.text = player.items[index];
+                item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
             }
             else
             {
                 index++;
-                itemText.text = player.items[index];
+                item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
             }
         }
     }
@@ -214,20 +227,21 @@ public class BattleSystem : MonoBehaviour
             if(index-1 < 0)
             {
                 index = player.items.Count-1;
-                itemText.text = player.items[index];
+                item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
             }
             else
             {
                 index--;
-                itemText.text = player.items[index];
+                item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
             }
         }
     }
 
     public void ClickOnUseItemButton()
     {
-        if(player.items.Count() != 0)
+        if(player.items.Count() != 0 && state == BattleState.PLAYERS_TURN)
         {
+            state = BattleState.ENEMYS_TURN;
             if (player.mana < 3f)
             {
                 player.mana++;
@@ -249,6 +263,7 @@ public class BattleSystem : MonoBehaviour
             animator6.SetBool("PlayerBoost", true);
             player.UseItem(item);
             player.items.Remove(item);
+            itemSprites.RemoveAt(index);
         }
         else
         {
@@ -258,6 +273,7 @@ public class BattleSystem : MonoBehaviour
             player.items.Remove(item);
             playerHealth.GetComponent<Slider>().value = player.health;
             PlayerSetHealthPoints(player.health);
+            itemSprites.RemoveAt(index);
         }
 
         //Resetting the player object color
@@ -272,11 +288,11 @@ public class BattleSystem : MonoBehaviour
         //Check if we have anymore items
         if(player.items.Count() == 0)
         {
-            itemText.text = "0";
+            this.item.SetActive(false);
         }
         else
         {
-            itemText.text = player.items[index];
+            this.item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
         }
 
         //Starts enemy turn
@@ -292,19 +308,41 @@ public class BattleSystem : MonoBehaviour
         EndGameDialog.SetActive(true);
         playerHealth.SetActive(false);
         enemyHealth.SetActive(false);
+        playerManeBar.SetActive(false);
+        enemyManaBar.SetActive(false);
+        manaHealthTexts.SetActive(false);
         if(state == BattleState.WON)
         {
-            ResultText.text = "You won the battle";
+            if (DataTransfer.defeatedEnemies.Where(x => x == true).Count() == DataTransfer.defeatedEnemies.Length)
+            {
+                ResultText.text = "You won the game!";
+            }
+            else
+            {
+                ResultText.text = "You won the battle!";
+            }
+
+            if(!DataTransfer.isTutorial)
+            {
+                DataTransfer.defeatedEnemies[DataTransfer.currentEnemyIndex] = true;
+            }
         }
         else
         {
-            ResultText.text = "You lost the battle";
+            ResultText.text = "You lost the battle!";
         }
     }
 
     public void ClickOnContinueButton()
     {
-        SceneManager.LoadScene("Menu");
+        if (DataTransfer.defeatedEnemies.Where(x => x == true).Count() == DataTransfer.defeatedEnemies.Length)
+        {
+            Invoke("LoadMenuIfGameIsWon", 3f);
+        } 
+        else
+        {
+            Invoke("LoadGame", 3f);
+        }
     }
 
     public void clickOnAdvancedButton()
@@ -345,6 +383,16 @@ public class BattleSystem : MonoBehaviour
     private void Awake()
     {
         Fader.SetActive(true);
+    }
+
+    private void LoadGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    void LoadMenuIfGameIsWon()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
 

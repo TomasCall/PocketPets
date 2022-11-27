@@ -11,15 +11,16 @@ public class PlayerMovement : MonoBehaviour
     public GameObject player;
     public Transform teleportPoint;
     public Animator animator;
-    public Inventory inventory;
-    public HandleTextFile handleTextFile;
 
     public float speed = 1.0f;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        inventory.CreateInventory();
+        if(!DataTransfer.isTutorial)
+        {
+            transform.position = new Vector3(DataTransfer.playerPositionX, DataTransfer.playerPositionY, 0f);
+        }
     }
 
     void Update()
@@ -57,27 +58,57 @@ public class PlayerMovement : MonoBehaviour
         //Inventory Management
         if (other.gameObject.CompareTag("13Damage"))
         {
-            inventory.inventory.Add("a+13");
+            DataTransfer.items.Add("a+13");
             Debug.Log("Picked up item: a+13");
-            handleTextFile.WriteString();
+            DataTransfer.itemSprites.Add(other.GetComponent<SpriteRenderer>().sprite);
+            DataTransfer.itemGameObjectNames.Add(other.gameObject.name);
         }
         if (other.gameObject.CompareTag("5Damage"))
         {
-            inventory.inventory.Add("a+5");
+            DataTransfer.items.Add("a+5");
             Debug.Log("Picked up item: a+5");
-            handleTextFile.WriteString();
+            DataTransfer.itemSprites.Add(other.GetComponent<SpriteRenderer>().sprite);
+            DataTransfer.itemGameObjectNames.Add(other.gameObject.name);
         }
         if (other.gameObject.CompareTag("13Health"))
         {
-            inventory.inventory.Add("h+13");
+            DataTransfer.items.Add("h+13");
             Debug.Log("Picked up item: h+13");
-            handleTextFile.WriteString();
+            DataTransfer.itemSprites.Add(other.GetComponent<SpriteRenderer>().sprite);
+            DataTransfer.itemGameObjectNames.Add(other.gameObject.name);
         }
         if (other.gameObject.CompareTag("5Health"))
         {
-            inventory.inventory.Add("h+5");
+            DataTransfer.items.Add("h+5");
             Debug.Log("Picked up item: h+5");
-            handleTextFile.WriteString();
+            DataTransfer.itemSprites.Add(other.GetComponent<SpriteRenderer>().sprite);
+            DataTransfer.itemGameObjectNames.Add(other.gameObject.name);
+        }
+        Debug.Log(DataTransfer.itemSprites.Count);
+
+        if (other.gameObject.CompareTag("Fish"))
+        {
+            DataTransfer.currentEnemyIndex = 0;
+            DataTransfer.playerPositionX = -65.1112f;
+            DataTransfer.playerPositionY = 95.15679f;
+        }
+        if (other.gameObject.CompareTag("Cica"))
+        {
+            DataTransfer.currentEnemyIndex = 1;
+            DataTransfer.playerPositionX = 621.2276f;
+            DataTransfer.playerPositionY = -499.2258f;
+        }
+        if (other.gameObject.CompareTag("Doggo"))
+        {
+            DataTransfer.currentEnemyIndex = 2;
+            DataTransfer.playerPositionX = -749.2672f;
+            DataTransfer.playerPositionY = 323.6138f;
+        }
+        if (other.gameObject.CompareTag("Panda"))
+        {
+            DataTransfer.currentEnemyIndex = 3;
+            DataTransfer.playerPositionX = 739.9427f;
+            DataTransfer.playerPositionY = 357.8624f;
         }
     }
     IEnumerator Teleporting() {

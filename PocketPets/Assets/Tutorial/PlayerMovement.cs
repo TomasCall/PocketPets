@@ -60,23 +60,31 @@ public class PlayerMovement : MonoBehaviour
         {
             DataTransfer.items.Add("a+13");
             Debug.Log("Picked up item: a+13");
+            DataTransfer.itemSprites.Add(other.GetComponent<SpriteRenderer>().sprite);
+            DataTransfer.itemGameObjectNames.Add(other.gameObject.name);
         }
         if (other.gameObject.CompareTag("5Damage"))
         {
             DataTransfer.items.Add("a+5");
             Debug.Log("Picked up item: a+5");
+            DataTransfer.itemSprites.Add(other.GetComponent<SpriteRenderer>().sprite);
+            DataTransfer.itemGameObjectNames.Add(other.gameObject.name);
         }
         if (other.gameObject.CompareTag("13Health"))
         {
             DataTransfer.items.Add("h+13");
             Debug.Log("Picked up item: h+13");
+            DataTransfer.itemSprites.Add(other.GetComponent<SpriteRenderer>().sprite);
+            DataTransfer.itemGameObjectNames.Add(other.gameObject.name);
         }
         if (other.gameObject.CompareTag("5Health"))
         {
             DataTransfer.items.Add("h+5");
             Debug.Log("Picked up item: h+5");
+            DataTransfer.itemSprites.Add(other.GetComponent<SpriteRenderer>().sprite);
+            DataTransfer.itemGameObjectNames.Add(other.gameObject.name);
         }
-        Debug.Log(DataTransfer.items.Count);
+        Debug.Log(DataTransfer.itemSprites.Count);
 
         if (other.gameObject.CompareTag("Fish"))
         {

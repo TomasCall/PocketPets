@@ -11,4 +11,6 @@ public static class DataTransfer
     public static int currentEnemyIndex = 0;
     public static List<string> items = new List<string>();
     public static bool isTutorial = true;
+    public static List<Sprite> itemSprites = new List<Sprite>();
+    public static List<string> itemGameObjectNames = new List<string>();
 }

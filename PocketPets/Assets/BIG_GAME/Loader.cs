@@ -13,6 +13,7 @@ public class Loader : MonoBehaviour
     void Start()
     {
         HideDefeatedEnemies();
+        HideAlreadyPosesedItems();
         DataTransfer.isTutorial = false;
     }
 
@@ -34,6 +35,14 @@ public class Loader : MonoBehaviour
             {
                 animals[i].SetActive(false);
             }
+        }
+    }
+
+    void HideAlreadyPosesedItems()
+    {
+        foreach(var name in DataTransfer.itemGameObjectNames)
+        {
+            GameObject.Find(name).SetActive(false);
         }
     }
 }

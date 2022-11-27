@@ -16,7 +16,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyGameObject;
     public GameObject playerHealth;
     public GameObject enemyHealth;
-    public TextMeshProUGUI itemText;
+    public List<Sprite> itemSprites;
+    public GameObject item;
     int index;
     public GameObject EndGameDialog;
     public GameObject CombatPanel;
@@ -44,6 +45,7 @@ public class BattleSystem : MonoBehaviour
         if(!DataTransfer.isTutorial)
         {
             GameObject.Find("enemySprite").GetComponent<SpriteRenderer>().sprite = sprites[DataTransfer.currentEnemyIndex];
+            itemSprites = DataTransfer.itemSprites;
         }
 
         playerManeBar.GetComponent<Slider>().value = 0f;
@@ -56,7 +58,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERS_TURN;
 
         index = 0;
-        itemText.text = player.items[index];
+        item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
 
         EndGameDialog.SetActive(false);
     }
@@ -208,12 +210,12 @@ public class BattleSystem : MonoBehaviour
             if(index+1 >= player.items.Count())
             {
                 index = 0;
-                itemText.text = player.items[index];
+                item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
             }
             else
             {
                 index++;
-                itemText.text = player.items[index];
+                item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
             }
         }
     }
@@ -225,12 +227,12 @@ public class BattleSystem : MonoBehaviour
             if(index-1 < 0)
             {
                 index = player.items.Count-1;
-                itemText.text = player.items[index];
+                item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
             }
             else
             {
                 index--;
-                itemText.text = player.items[index];
+                item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
             }
         }
     }
@@ -261,6 +263,7 @@ public class BattleSystem : MonoBehaviour
             animator6.SetBool("PlayerBoost", true);
             player.UseItem(item);
             player.items.Remove(item);
+            itemSprites.RemoveAt(index);
         }
         else
         {
@@ -270,6 +273,7 @@ public class BattleSystem : MonoBehaviour
             player.items.Remove(item);
             playerHealth.GetComponent<Slider>().value = player.health;
             PlayerSetHealthPoints(player.health);
+            itemSprites.RemoveAt(index);
         }
 
         //Resetting the player object color
@@ -284,11 +288,11 @@ public class BattleSystem : MonoBehaviour
         //Check if we have anymore items
         if(player.items.Count() == 0)
         {
-            itemText.text = "0";
+            this.item.SetActive(false);
         }
         else
         {
-            itemText.text = player.items[index];
+            this.item.GetComponent<SpriteRenderer>().sprite = itemSprites[index];
         }
 
         //Starts enemy turn

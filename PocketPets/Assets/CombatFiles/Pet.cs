@@ -20,9 +20,13 @@ public class Pet : MonoBehaviour
     private void Start()
     {
         DiffChecker();
-        if (gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag("Player") && DataTransfer.items.Count != 0)
         {
-            items = File.ReadAllLines("Assets/Data/inventory.txt").ToList();
+            items = new List<string>();
+            foreach(var itemTmp in DataTransfer.items)
+            {
+                items.Add(itemTmp);
+            }
         }
     }
     public float GetAttack()

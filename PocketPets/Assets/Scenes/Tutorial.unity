@@ -742,6 +742,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6090968310535206744, guid: 1820de2486ba57b4ab558fb053d2b1ce, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090968310535206744, guid: 1820de2486ba57b4ab558fb053d2b1ce, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090968311195353617, guid: 1820de2486ba57b4ab558fb053d2b1ce, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090968311195353617, guid: 1820de2486ba57b4ab558fb053d2b1ce, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090968311195353617, guid: 1820de2486ba57b4ab558fb053d2b1ce, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6934318364028981785, guid: 1820de2486ba57b4ab558fb053d2b1ce, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -6826,6 +6846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fader
       objectReference: {fileID: 0}
+    - target: {fileID: 4417388966588213921, guid: d62658a42bf3c2b45a216a388f3c6313, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4417388966588213926, guid: d62658a42bf3c2b45a216a388f3c6313, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6921,6 +6945,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4857356438944730822, guid: 0a303838f3521464fa71d707e7a1ef43, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857356438944730823, guid: 0a303838f3521464fa71d707e7a1ef43, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857356438944730823, guid: 0a303838f3521464fa71d707e7a1ef43, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4857356439129736081, guid: 0a303838f3521464fa71d707e7a1ef43, type: 3}

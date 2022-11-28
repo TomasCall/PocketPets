@@ -1,3 +1,1 @@
 # PocketPets
-Geri
-Peti
